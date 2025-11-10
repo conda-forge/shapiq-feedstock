@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: shapiq
-  version: 1.3.2
+  version: 1.4.1
 
 package:
   name: ${{ name|lower }}
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/shapiq-${{ version }}.tar.gz
-  sha256: 4686281edb6fbfe4e3678db09b2dd217f85345c9a265b3b38e81c41da62c218a
+  sha256: 7f612c84fcfe4746ff826db72efa2944f9aa693c5c00c6e17a882613471534f8
 
 build:
   number: 0
@@ -36,6 +36,7 @@ requirements:
     - networkx
     - colour
     - pillow
+    - joblib
 tests:
   - python:
       imports:
