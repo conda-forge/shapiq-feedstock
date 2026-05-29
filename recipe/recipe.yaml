@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: shapiq
-  version: 1.4.1
+  version: 1.5.0
 
 package:
   name: ${{ name|lower }}
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/shapiq-${{ version }}.tar.gz
-  sha256: 7f612c84fcfe4746ff826db72efa2944f9aa693c5c00c6e17a882613471534f8
+  sha256: 4848ff7d540eab4f56b6b01b7ce22b027282f526dbe4d69cf9766ea3765231ba
 
 build:
   number: 0
@@ -30,8 +30,6 @@ requirements:
     - scikit-learn
     - tqdm
     - requests
-    - sparse-transform
-    - galois
     - matplotlib-base
     - networkx
     - colour
