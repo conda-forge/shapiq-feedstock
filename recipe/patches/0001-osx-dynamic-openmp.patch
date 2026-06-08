@@ -1,0 +1,51 @@
+--- a/setup.py	2026-06-08 10:33:50.280493052 +0000
++++ b/setup.py	2026-06-08 10:35:45.872838992 +0000
+@@ -76,8 +76,8 @@
+         for prefix in candidates:
+             include_dir = prefix / "include"
+             library_dir = prefix / "lib"
+-            libomp_archive = library_dir / "libomp.a"
+-            if include_dir.exists() and libomp_archive.exists():
++            libomp_dylib = library_dir / "libomp.dylib"
++            if include_dir.exists() and libomp_dylib.exists():
+                 return {
+                     "extra_compile_args": [
+                         "-std=c++17",
+@@ -85,32 +85,15 @@
+                         "-fopenmp",
+                         "-O3",
+                         "-ffast-math",
+-                        # Hide our own (algorithms::*) symbols; only _PyInit_cext
+-                        # is exported via the linker allowlist below.
+-                        "-fvisibility=hidden",
+-                    ],
+-                    "extra_link_args": [
+-                        # Static-link the libomp archive AND hide every symbol it
+-                        # contributes (-load_hidden). Hidden symbols never enter
+-                        # the export table, so dyld cannot coalesce them with any
+-                        # other libomp image in the process. No LC_LOAD_DYLIB for
+-                        # libomp is recorded, so delocate vendors nothing.
+-                        f"-Wl,-load_hidden,{libomp_archive}",
+-                        # Drop libomp objects not reachable from the __kmpc_*
+-                        # entry points we actually call, bounding the size added
+-                        # to this single extension.
+-                        "-Wl,-dead_strip",
+-                        # Belt-and-suspenders allowlist: export only the module
+-                        # init symbol. Closes the coalescing surface even if a
+-                        # weak libomp symbol slipped past -load_hidden.
+-                        "-Wl,-exported_symbol,_PyInit_cext",
+                     ],
++                    "extra_link_args": ["-lomp"],
+                     "include_dirs": [str(include_dir)],
++                    "library_dirs": [str(library_dir)],
+                 }
+         msg = (
+-            "OpenMP support on macOS requires a static libomp (libomp.a). Either "
+-            "install it via Homebrew (`brew install libomp`) or set LIBOMP_PREFIX "
+-            "to a directory containing include/omp.h and lib/libomp.a."
++            "OpenMP support on macOS requires libomp. Either install it via "
++            "Homebrew (`brew install libomp`) or set LIBOMP_PREFIX to a "
++            "directory containing include/omp.h and lib/libomp.dylib."
+         )
+         raise RuntimeError(msg)
+     # Linux and others
