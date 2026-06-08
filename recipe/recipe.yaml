@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: shapiq
-  version: 1.4.1
+  version: 1.5.1
 
 package:
   name: ${{ name|lower }}
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/shapiq-${{ version }}.tar.gz
-  sha256: 7f612c84fcfe4746ff826db72efa2944f9aa693c5c00c6e17a882613471534f8
+  sha256: 6c2d4abe3b1982c6891d671e5484b3c9a9c48e7747c66caa958dfead6042cbb4
 
 build:
   number: 0
@@ -20,7 +20,10 @@ build:
 requirements:
   host:
     - python ${{ python_min }}.*
-    - setuptools >=61.0
+    - setuptools >=69
+    - setuptools-scm >=8
+    - wheel
+    - numpy
     - pip
   run:
     - python >=${{ python_min }}
@@ -30,13 +33,12 @@ requirements:
     - scikit-learn
     - tqdm
     - requests
-    - sparse-transform
-    - galois
     - matplotlib-base
     - networkx
     - colour
     - pillow
     - joblib
+
 tests:
   - python:
       imports:
