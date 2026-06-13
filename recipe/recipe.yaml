@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: shapiq
-  version: 1.5.1
+  version: "1.5.2"
 
 package:
   name: ${{ name|lower }}
@@ -10,14 +10,14 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/shapiq-${{ version }}.tar.gz
-  sha256: 6c2d4abe3b1982c6891d671e5484b3c9a9c48e7747c66caa958dfead6042cbb4
+  sha256: 6336d764ce27836b69a1d3283392d69c8c2f4dcd3f52e19d2ad037d5aac1708c
   patches:
     - if: osx
       then:
         - patches/0001-osx-dynamic-openmp.patch
 
 build:
-  number: 1
+  number: 0
   skip: match(python, "<3.12")
   script: |
     export LIBOMP_PREFIX=$PREFIX
