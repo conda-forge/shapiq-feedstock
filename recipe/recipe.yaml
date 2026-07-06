@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: shapiq
-  version: "1.5.2"
+  version: "1.6.0"
 
 package:
   name: ${{ name|lower }}
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/shapiq-${{ version }}.tar.gz
-  sha256: 6336d764ce27836b69a1d3283392d69c8c2f4dcd3f52e19d2ad037d5aac1708c
+  sha256: da3e0c047198ab1abeae1ea845b261f75da9443130f26e46e96fb93c13cccfc5
   patches:
     - if: osx
       then:
