@@ -11,6 +11,10 @@ package:
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/shapiq-${{ version }}.tar.gz
   sha256: 17cad036c50ec5782a4e72550ba5b1e73955b8f06387acb6e20d436eb33eb44d
+  patches:
+    - if: osx
+      then:
+        - patches/0001-osx-dynamic-openmp.patch
 
 build:
   number: 0
